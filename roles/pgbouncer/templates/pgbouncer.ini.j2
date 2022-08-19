@@ -9,9 +9,9 @@
 logfile = {{ pgbouncer_log_dir }}/pgbouncer.log
 pidfile = /var/run/pgbouncer/pgbouncer.pid
 {% if not with_haproxy_load_balancing|bool and cluster_vip is defined and cluster_vip | length > 0 %}
-listen_addr = {{ hostvars[inventory_hostname]['inventory_hostname'] }},{{ cluster_vip }}
+listen_addr = {{ hostvars[inventory_hostname]['postgres_local_address'] }},{{ cluster_vip }}
 {% else %}
-listen_addr = {{ hostvars[inventory_hostname]['inventory_hostname'] }}
+listen_addr = {{ hostvars[inventory_hostname]['postgres_local_address'] }}
 {% endif %}
 listen_port = {{ pgbouncer_listen_port | default(6432) }}
 unix_socket_dir = /var/run/postgresql

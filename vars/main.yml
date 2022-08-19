@@ -3,9 +3,9 @@
 # yamllint disable rule:comments-indentation
 
 # Proxy variables (optional) for download packages using a proxy server
-proxy_env: {}
-#  http_proxy: http://10.128.64.9:3128
-#  https_proxy: http://10.128.64.9:3128
+proxy_env:
+  http_proxy: yourproxy
+  https_proxy: yourproxy
 
 # -------------------------------------------
 
@@ -13,7 +13,7 @@ proxy_env: {}
 cluster_vip: ""  # ip address for client access to databases in the cluster (optional)
 vip_interface: "{{ ansible_default_ipv4.interface }}"  # interface name (ex. "ens32")
 
-patroni_cluster_name: "postgres-cluster"  # specify the cluster name
+patroni_cluster_name: "supsailor-cluster-3"  # specify the cluster name
 patroni_install_version: "latest"  # or specific version (example 1.5.6)
 
 patroni_superuser_username: "postgres"
@@ -72,7 +72,7 @@ patroni_etcd_hosts: []
 
 
 # PostgreSQL variables
-postgresql_version: "14"
+postgresql_version: "12"
 # postgresql_data_dir: see vars/Debian.yml or vars/RedHat.yml
 postgresql_port: "5432"
 postgresql_encoding: "UTF8"  # for bootstrap only (initdb)
@@ -81,15 +81,15 @@ postgresql_data_checksums: true  # for bootstrap only (initdb)
 postgresql_password_encryption_algorithm: "scram-sha-256"  # or "md5" if your clients do not work with passwords encrypted with SCRAM-SHA-256
 
 # (optional) list of users to be created (if not already exists)
-postgresql_users: []
-#  - {name: "mydb-user", password: "mydb-user-pass", flags: "SUPERUSER"}
+postgresql_users:
+  - {name: "supsailor", password: "supsailor", flags: "SUPERUSER"}
 #  - {name: "", password: "", flags: "NOSUPERUSER"}
 #  - {name: "", password: "", flags: "NOSUPERUSER"}
 #  - {name: "", password: "", flags: "NOLOGIN"}
 
 # (optional) list of databases to be created (if not already exists)
-postgresql_databases: []
-#  - {db: "mydatabase", encoding: "UTF8", lc_collate: "ru_RU.UTF-8", lc_ctype: "ru_RU.UTF-8", owner: "mydb-user"}
+postgresql_databases:
+  - {db: "supsailor", encoding: "UTF8", lc_collate: "ru_RU.UTF-8", lc_ctype: "ru_RU.UTF-8", owner: "supsailor"}
 #  - {db: "", encoding: "UTF8", lc_collate: "en_US.UTF-8", lc_ctype: "en_US.UTF-8", owner: ""}
 #  - {db: "", encoding: "UTF8", lc_collate: "en_US.UTF-8", lc_ctype: "en_US.UTF-8", owner: ""}
 

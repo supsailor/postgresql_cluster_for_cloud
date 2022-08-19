@@ -33,7 +33,7 @@
       pip:
         requirements: /tmp/requirements.txt
         executable: pip3
-        extra_args: "--trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org"
+        extra_args: "--ignore-installed --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org"
         umask: "0022"
       environment:
         PATH: "{{ ansible_env.PATH }}:{{ postgresql_bin_dir }}:/usr/local/bin:/usr/bin"
@@ -771,7 +771,7 @@
     - name: Wait for port 8008 to become open on the host
       wait_for:
         port: 8008
-        host: "{{ hostvars[inventory_hostname]['inventory_hostname'] }}"
+        host: "{{ hostvars[inventory_hostname]['postgres_local_address'] }}"
         state: started
         timeout: 120
         delay: 10
@@ -917,7 +917,7 @@
     - name: Wait for port 8008 to become open on the host
       wait_for:
         port: 8008
-        host: "{{ hostvars[inventory_hostname]['inventory_hostname'] }}"
+        host: "{{ hostvars[inventory_hostname]['postgres_local_address'] }}"
         state: started
         timeout: 120
         delay: 10
